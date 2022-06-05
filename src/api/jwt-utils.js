@@ -1,7 +1,6 @@
-// eslint-disable-next-line import/no-unresolved
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import {db} from "../models/db.js";
+import { db } from "../models/db.js";
 
 const result = dotenv.config();
 
@@ -13,7 +12,7 @@ export function createToken(user) {
     const options = {
         algorithm: "HS256",
         expiresIn: "1h",
-    }
+    };
     return jwt.sign(payload, process.env.cookie_password, options);
 }
 
@@ -24,7 +23,6 @@ export function decodeToken(token) {
         userInfo.userId = decoded.id;
         userInfo.email = decoded.email;
     } catch (e) {
-        // eslint-disable-next-line no-console
         console.log(e.message);
     }
     return userInfo;
@@ -33,7 +31,20 @@ export function decodeToken(token) {
 export async function validate(decoded, request) {
     const user = await db.userStore.getUserById(decoded.id);
     if (!user) {
-        return {isValid: false};
+        return { isValid: false };
     }
-    return {isValid: true, credentials: user};
+    return { isValid: true, credentials: user };
+}
+
+export function getUserIdFromRequest(request) {
+    let userId = null;
+    try {
+        const { authorization } = request.headers;
+        const token = authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, "secretpasswordnotrevealedtoanyone");
+        userId = decodedToken.id;
+    } catch (e) {
+        userId = null;
+    }
+    return userId;
 }

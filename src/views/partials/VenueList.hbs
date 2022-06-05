@@ -1,0 +1,19 @@
+<table class="table is-fullwidth">
+    <thead>
+    <th>Name</th>
+    <th>Venue Type</th>
+    <th>Adder</th>
+    <th>Country</th>
+    </thead>
+    <tbody>
+    {{#each venues}}
+        <tr>
+            <td>{{vName}}</td>
+            <td>{{method}}</td>
+            <td> {{adder.firstName}} {{adder.lastName}} </td>
+            <td>{{country.country1Name}}, {{country.country2Name}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+

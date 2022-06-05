@@ -1,0 +1,29 @@
+<form action="/add" method="POST">
+    <div class="field">
+        <label class="label">Enter Venue Details</label> <input class="input" type="string" placeholder="Enter Details" name="vName">
+    </div>
+    <div class="field">
+        <div class="control">
+            <label class="radio">
+                <input type="radio" name="method" value="indoor"> Indoor </label>
+            <label class="radio">
+                <input type="radio" name="method" value="indoor"> Outdoor </label>
+            <label class="radio">
+                <input type="radio" name="method" value="indoor"> Hybrid </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="select">
+            <select name="country">
+                {{#each countries }}
+                    <option> {{country1Name}},{{country2Name}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link is-light">Add Venue</button>
+        </div>
+    </div>
+</form>

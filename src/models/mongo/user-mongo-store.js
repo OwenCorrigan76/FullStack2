@@ -1,4 +1,4 @@
-import { User } from "./user.js";
+import {User} from "./user.js";
 
 export const userMongoStore = {
     async getAllUsers() {
@@ -8,7 +8,7 @@ export const userMongoStore = {
 
     async getUserById(id) {
         if (id) {
-            const user = await User.findOne({ _id: id }).lean();
+            const user = await User.findOne({_id: id}).lean();
             return user;
         }
         return null;
@@ -22,13 +22,13 @@ export const userMongoStore = {
     },
 
     async getUserByEmail(email) {
-        const user = await User.findOne({ email: email }).lean();
+        const user = await User.findOne({email: email}).lean();
         return user;
     },
 
     async deleteUserById(id) {
         try {
-            await User.deleteOne({ _id: id });
+            await User.deleteOne({_id: id});
         } catch (error) {
             console.log("bad id");
         }

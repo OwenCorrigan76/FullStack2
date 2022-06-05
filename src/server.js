@@ -12,7 +12,7 @@ import {fileURLToPath} from "url";
 import Handlebars from "handlebars";
 
 import dotenv from "dotenv";
-import { validate } from "./api/jwt-utils.js";
+import {validate} from "./api/jwt-utils.js";
 import {apiRoutes} from "./api-routes.js";
 import {webRoutes} from "./web-routes.js";
 import {db} from "./models/db.js";
@@ -31,12 +31,19 @@ const swaggerOptions = {
 const result = dotenv.config();
 if (result.error) {
     console.log(result.error.message);
-    process.exit(1);
+
 }
+// const fs = require("fs");
 
 async function init() {
+
     const server = Hapi.server({
-        port: process.env.PORT || 3000,
+        port: process.env.PORT || 4000,
+        routes: {cors: true},
+        // tls: {
+        // key: fs.readFileSync("/security keys/private/webserver.key"),
+        //   cert:fs.readFileSync("security keys/webserver.crt")
+
     });
 
     await server.register(Vision);
@@ -70,7 +77,7 @@ async function init() {
     server.auth.strategy("jwt", "jwt", {
         key: process.env.cookie_password,
         validate: validate,
-        verifyOptions: { algorithms: ["HS256"] }
+        verifyOptions: {algorithms: ["HS256"]},
     });
 
     server.auth.strategy("session", "cookie", {
@@ -85,7 +92,6 @@ async function init() {
     server.auth.default("session");
 
 
-
     db.init("mongo");
     server.route(webRoutes);
     server.route(apiRoutes);
@@ -96,7 +102,7 @@ async function init() {
 
 process.on("unhandledRejection", (err) => {
     console.log(err);
-    process.exit(1);
+    // process.exit(1);
 });
 
 init();

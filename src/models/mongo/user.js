@@ -1,6 +1,6 @@
 import Mongoose from "mongoose";
 
-const { Schema } = Mongoose;
+const {Schema} = Mongoose;
 
 const userSchema = new Schema({
     firstName: String,

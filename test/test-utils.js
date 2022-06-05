@@ -9,6 +9,7 @@ export function assertSubset(subset, superset) {
         const subsetItem = subset[key];
         const supersetItem = superset[key];
         if (typeof subsetItem === "object" && subsetItem !== null ? !assertSubset(supersetItem, subsetItem) : supersetItem !== subsetItem) return false;
+
         return true;
     });
 }
