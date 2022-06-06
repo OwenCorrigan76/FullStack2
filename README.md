@@ -4,9 +4,9 @@ The app utilises the following features:
 
 User Sign up / Login in
 CRUD Venues (POIs).
-Map, placing markers at venues.
+Map, placing markers at venues
 Testing / API testing
 Deployment on Heroku
 
 This project is devised using hapi and handlebars framework with additional node.js plugins.
-The URL for the deployed app is https://murmuring-beach-45161.herokuapp.com/
+The URL for the deployed app is https://murmuring-beach-45161.herokuapp.com/.
